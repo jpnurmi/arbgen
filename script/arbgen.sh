@@ -13,10 +13,6 @@ if ! dart --version >/dev/null 2>&1; then
 fi
 
 project_dir=$(pwd)
-arbgen_dir="$project_dir/tool/arbgen"
-arbgen_bin="$arbgen_dir/bin/arbgen.dart"
-
-(cd "$arbgen_dir" && dart pub get)
 
 # find dirs that contain .arb files
 arb_dirs=$(find "$project_dir" -type f -name "*.arb" -exec dirname {} \; | uniq)
@@ -43,7 +39,7 @@ for import_dir in "$@"; do
             # app_en.arb -> app, ubuntu_en.arb -> ubuntu
             prefix=$(basename $(find "$arb_dir" -name "*_en.arb") "_en.arb")
 
-            dart run "$arbgen_bin" "$po_dir" --verbose --prefix $prefix \
+            arbgen "$po_dir" --verbose --prefix $prefix \
               --output "$(realpath $arb_dir --relative-to="$project_dir")" 
         done
     done

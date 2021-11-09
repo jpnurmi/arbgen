@@ -11,3 +11,6 @@ dependencies:
   gettext_parser: ^0.2.0
   path: ^1.8.0
   quiver: ^3.0.1+1
+
+executables:
+  arbgen:
